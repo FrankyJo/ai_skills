@@ -25,7 +25,19 @@ Use this whenever the user provides a video path in intake Block 4.
 
 ### Core approach
 
-A hidden `<video>` element preloads the file. On every scroll tick the handler sets `video.currentTime = progress * video.duration`, then draws `drawImage(video, ...)` onto the canvas. The result is identical to the frame-sequence approach but requires only one file.
+A hidden `<video>` element preloads the file. On every scroll tick the handler seeks to the target time via a **seek queue** (not a direct `currentTime` assignment), then draws `drawImage(video, ...)` in the `seeked` event callback. The result is identical to the frame-sequence approach but requires only one file.
+
+### DO NOT use `requestVideoFrameCallback` (rVFC) for scrubbing
+
+rVFC is designed for playback, not seeking. During `seeking`, it fires on partially decoded frames → visible glitches. Use the `seeked` event instead (see component pattern below).
+
+### Scroll handler: always `window.addEventListener`, never `lenis.on('scroll')`
+
+When Lenis is active, `lenis.on('scroll')` fires inside the GSAP ticker — nesting a RAF inside it is unreliable. For canvas scrubbing always use:
+
+```js
+window.addEventListener('scroll', handler, { passive: true });
+```
 
 ### Full component pattern
 
@@ -75,18 +87,20 @@ export default function HeroCanvas() {
     return () => window.removeEventListener("resize", resize);
   }, []);
 
-  const drawFrame = (progress: number) => {
+  // Seek queue — prevents concurrent seeks and unpredictable browser behaviour
+  const isSeekingRef = useRef(false);
+  const nextTimeRef  = useRef<number | null>(null);
+
+  const drawCurrentFrame = () => {
     const canvas = canvasRef.current;
     const video  = videoRef.current;
     if (!canvas || !video || !readyRef.current) return;
 
     const ctx = canvas.getContext("2d")!;
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high"; // critical on Mac Retina — canvas is 2880px, video 1920px
+
     const cw = canvas.width, ch = canvas.height;
-
-    // Seek video to the right time
-    video.currentTime = progress * video.duration;
-
-    // Cover-fit draw (same math as image sequence)
     const vRatio = video.videoWidth / video.videoHeight;
     const cRatio = cw / ch;
     let dw: number, dh: number;
@@ -94,13 +108,39 @@ export default function HeroCanvas() {
     if (cRatio > vRatio) { dw = cw; dh = cw / vRatio; }
     else                  { dh = ch; dw = ch * vRatio; }
 
-    // Mobile: zoom in 1.3x
     if (window.innerWidth <= 768) { dw *= 1.3; dh *= 1.3; }
 
-    const dx = (cw - dw) / 2;
-    const dy = (ch - dh) / 2;
-    ctx.drawImage(video, dx, dy, dw, dh);
+    ctx.drawImage(video, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
   };
+
+  const seekTo = (time: number) => {
+    const video = videoRef.current;
+    if (!video || !readyRef.current) return;
+
+    if (isSeekingRef.current) {
+      nextTimeRef.current = time; // queue the latest target, drop intermediates
+      return;
+    }
+    isSeekingRef.current = true;
+    video.currentTime = time;
+  };
+
+  // Draw after seek completes — avoids glitched partial frames
+  useEffect(() => {
+    const video = videoRef.current!;
+    const onSeeked = () => {
+      drawCurrentFrame();
+      if (nextTimeRef.current !== null) {
+        const t = nextTimeRef.current;
+        nextTimeRef.current = null;
+        video.currentTime = t; // drain queue
+      } else {
+        isSeekingRef.current = false;
+      }
+    };
+    video?.addEventListener("seeked", onSeeked);
+    return () => video?.removeEventListener("seeked", onSeeked);
+  }, []);
 
   // Scroll handler
   useEffect(() => {
@@ -116,7 +156,7 @@ export default function HeroCanvas() {
         const scrollable = section.offsetHeight - window.innerHeight;
         const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
 
-        drawFrame(progress);
+        seekTo(progress * (videoRef.current?.duration ?? 0));
 
         tickingRef.current = false;
       });
@@ -154,10 +194,14 @@ export default function HeroCanvas() {
 
 ### `ffmpeg` one-liner for web-optimized output
 
+The `-g 1` flag is **critical for scrubbing** — it forces a keyframe on every frame so the browser can seek to any point instantly. Without it the browser must decode from the previous keyframe → visible lag on fast scrolls.
+
 ```bash
-ffmpeg -i input.mp4 -vcodec libx264 -crf 28 -pix_fmt yuv420p -movflags faststart output.mp4
-ffmpeg -i input.mp4 -vcodec libvpx-vp9 -crf 35 -b:v 0 output.webm
+ffmpeg -i input.mp4 -vcodec libx264 -crf 28 -g 1 -pix_fmt yuv420p -movflags faststart output.mp4
+ffmpeg -i input.mp4 -vcodec libvpx-vp9 -crf 35 -g 1 -b:v 0 output.webm
 ```
+
+> `-g 1` increases file size by ~30–50% compared to normal encoding. That is expected and acceptable — the alternative is a laggy scrub.
 
 ### Loading state for video
 

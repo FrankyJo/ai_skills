@@ -108,24 +108,29 @@ A loading overlay with progress bar covers the page until all frames are ready. 
 
 ## 5. Hardware Acceleration
 
-Force GPU compositing for sticky containers and canvases:
+Apply GPU hints **only on the canvas itself**, not on the sticky parent container:
 
 ```tsx
-<div
-  className="sticky top-0 h-screen"
-  style={{ willChange: "transform", transform: "translateZ(0)" }}
->
-  <canvas style={{ willChange: "contents", transform: "translateZ(0)" }} />
+<div className="sticky top-0 h-screen">
+  {/* NO will-change here — wrong GPU layer on Mac Retina → blur */}
+  <canvas
+    style={{
+      willChange: "contents",
+      transform: "translateZ(0)", // GPU layer on the canvas only
+    }}
+  />
 </div>
 ```
 
-| Property | Effect |
-|----------|--------|
-| `will-change: transform` | Promotes element to its own GPU layer |
-| `transform: translateZ(0)` | Forces 3D compositing (GPU acceleration) |
-| `will-change: contents` | Hints that content (canvas pixels) will change frequently |
+| Property | Where | Effect |
+|----------|-------|--------|
+| `will-change: contents` | canvas only | Hints that pixel content will change frequently |
+| `transform: translateZ(0)` | canvas only | Promotes canvas to its own GPU layer |
+| ~~`will-change: transform`~~ | ~~sticky parent~~ | **Do not use** — creates a GPU layer at the wrong resolution on Mac Retina, causing blur |
 
-**Caution:** Don't overuse `will-change` — each promoted layer consumes GPU memory. Only use it on elements that genuinely animate frequently.
+**Why the parent must not have `will-change: transform`:** On Mac Retina the sticky container is a CSS stacking context. Adding `will-change` promotes it at the logical resolution (1440px), not the physical one (2880px). The canvas inside inherits this context → blurry output even with correct DPR scaling.
+
+**Caution:** Each promoted layer consumes GPU memory. Only apply to elements that genuinely change every frame.
 
 ---
 
@@ -141,7 +146,7 @@ window.addEventListener("scroll", handleScroll, { passive: true });
 
 ---
 
-## 7. Canvas DPI Scaling
+## 7. Canvas DPI Scaling + Image Smoothing
 
 Render at the device's native resolution for crisp display:
 
@@ -156,9 +161,17 @@ canvas.style.height = window.innerHeight + "px";
 On a 2x retina display:
 - Internal canvas: 2880x1800 pixels
 - Display size: 1440x900 CSS pixels
-- Result: perfectly crisp rendering
+- Video source: typically 1920x1080
 
-On a 1x display, `dpr = 1` so no extra pixels are wasted.
+Because the canvas is physically larger than the video, the browser scales up. Without `imageSmoothingQuality = 'high'` the upscale is blurry. **Always set this after getting the context:**
+
+```tsx
+const ctx = canvas.getContext("2d")!;
+ctx.imageSmoothingEnabled = true;
+ctx.imageSmoothingQuality = "high"; // must set — default is "low"
+```
+
+Set it once after `getContext` and again after any `canvas.width` / `canvas.height` resize — resizing resets canvas state including smoothing settings.
 
 ---
 
@@ -201,7 +214,8 @@ For elements that toggle during scroll (many times per second), CSS transitions 
 - [ ] Frequently-changing values use refs, not useState
 - [ ] React state only updates when values actually change
 - [ ] Frames are preloaded before animation starts
-- [ ] Sticky containers have `will-change: transform`
+- [ ] Canvas has `will-change: contents` + `transform: translateZ(0)` — **not** the sticky parent
+- [ ] `ctx.imageSmoothingQuality = "high"` set after `getContext` and after every resize
 - [ ] Scroll listeners are passive
 - [ ] Canvas scales for device pixel ratio
 - [ ] Third-party scripts use `lazyOnload` strategy

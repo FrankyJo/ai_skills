@@ -258,7 +258,7 @@ The default animation source is a single `.mp4` per section (specified in intake
 
 ### Responsive checklist (run before step 9)
 
-- [ ] No horizontal scroll at 375px, 768px, 1440px
+- [ ] No horizontal scroll at 375px, 768px, 1440px (use `overflow: clip` on body — not `overflow-x: hidden`, which breaks sticky)
 - [ ] Every grid collapses to single column on mobile
 - [ ] Section padding reduced on mobile (`py-16 md:py-32`)
 - [ ] Hamburger menu visible and working on mobile
@@ -297,8 +297,13 @@ Full performance deep-dive: **references/06-performance-optimization.md**
 4. **React state on scroll value** — jank, high CPU. Fix: use refs and update DOM directly.
 5. **Canvas blurry on retina** — missed DPR scaling. Fix: multiply `canvas.width`/`height` by `devicePixelRatio`.
 6. **Safari smooth-scroll stutter** — Lenis defaults don't suit iOS. Fix: `lerp: 0.1`, `syncTouch: false`.
-7. **Horizontal overflow on mobile** — stray absolute element. Fix: add `overflow-x-hidden` to `body` and investigate with DevTools.
+7. **`overflow-x: hidden` on `body` breaks `position: sticky`** — the canvas section stops pinning. Fix: use `overflow: clip` instead — it clips overflow without creating a scroll container, so sticky still works.
 8. **Mobile nav not implemented** — desktop links on a 375px screen look broken. Always build the hamburger at step 3, not later.
+9. **`python -m http.server` breaks video scrubbing (Vanilla only)** — it doesn't support HTTP Range requests → `video.currentTime` has no effect → canvas never updates. Fix: use `npx serve .` instead.
+10. **`gsap.from()` instead of `gsap.fromTo()`** — `gsap.from()` reads the current computed state as the end state. If CSS doesn't have `opacity: 0` explicitly, the animation either doesn't play or snaps on completion. Always use `gsap.fromTo()` with explicit from and to values.
+11. **`gsap.registerPlugin(ScrollTrigger)` called multiple times or inside functions** — causes unpredictable behaviour. Always register once at the top of the file, before any other GSAP code.
+12. **TDZ with `const` in Vanilla JS** — if `seekTo` or `seeked` listeners reference `const video = ...` before the declaration line runs, you get `ReferenceError`. Always declare variables before the functions that use them. Structure: declare → assign handlers → call init.
+13. **Hero nav + site header conflict** — a common pattern is: hero has its own inline nav (visible while hero is on screen), and a fixed site header appears after hero scrolls out. Show/hide condition: `section.getBoundingClientRect().bottom <= window.innerHeight` means hero has left the viewport — show site header, hide hero nav. Wire this check inside the same scroll handler as the canvas scrub.
 
 ## References index
 

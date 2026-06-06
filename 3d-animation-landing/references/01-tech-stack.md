@@ -158,6 +158,24 @@ import SmoothScrollProvider from "../components/providers/SmoothScrollProvider";
 
 No framework, no build step. Just files in a browser. Use this when the user explicitly wants plain HTML or doesn't need a JS framework.
 
+### Dev server — critical
+
+**Never use `python -m http.server`** — it does not support HTTP Range requests. Video seeking (`video.currentTime = ...`) silently fails: the canvas never updates on scroll.
+
+Always use:
+
+```bash
+npx serve .
+```
+
+or:
+
+```bash
+npx http-server . --cors
+```
+
+Both support Range requests out of the box. This is the #1 reason canvas scrubbing "doesn't work" on Vanilla projects.
+
 ### File structure
 
 ```

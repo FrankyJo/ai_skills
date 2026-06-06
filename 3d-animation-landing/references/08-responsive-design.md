@@ -252,7 +252,7 @@ import Image from "next/image";
 - **No hover-only interactions** — anything that requires hover must also work on tap.
 - **Scroll-driven canvas + touch scroll** — Lenis with `syncTouch: false` on iOS prevents fighting between Lenis and native touch scroll. This is already in the SmoothScrollProvider defaults.
 - **Font size minimum: 16px** on mobile — smaller fonts trigger iOS auto-zoom on input focus.
-- **Avoid horizontal overflow** — add `overflow-x-hidden` to `<body>` or the root wrapper to catch stray absolute elements.
+- **Avoid horizontal overflow** — add `overflow: clip` to `<body>`, not `overflow-x: hidden`. `overflow-x: hidden` creates a scroll container that breaks `position: sticky`. `overflow: clip` clips without creating a scroll context.
 
 ---
 
