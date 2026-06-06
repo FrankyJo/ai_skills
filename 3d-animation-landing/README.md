@@ -15,6 +15,24 @@ A Claude Code skill for building premium scroll-animated landing pages from scra
 
 ---
 
+## Install
+
+Clone directly into your Claude skills folder — no symlinks, works immediately:
+
+```bash
+git clone https://github.com/ppv/skills ~/.claude/skills
+```
+
+Start a new Claude Code conversation — the skill loads automatically.
+
+**To update later:**
+
+```bash
+git -C ~/.claude/skills pull
+```
+
+---
+
 ## How to use
 
 The skill activates automatically in Claude Code when you describe a relevant task. No manual command needed.
@@ -139,6 +157,24 @@ If you don't have a video, the skill falls back to a numbered image sequence (`f
 - Застосовує одну з чотирьох дизайн-систем (Neumorphic Light, Glassmorphic Dark, Minimal, Dark Premium)
 - Верстає кожну секцію адаптивно з гамбургер-меню та мобільними налаштуваннями canvas
 - Проводить адаптивний прохід (375px / 768px / 1440px) і прохід продуктивності (RAF, DPR, Lighthouse) перед фіналізацією
+
+---
+
+## Встановлення
+
+Клонуй прямо в папку навичок Claude — без симлінків, одразу працює:
+
+```bash
+git clone https://github.com/ppv/skills ~/.claude/skills
+```
+
+Почни нову розмову в Claude Code — навичка завантажиться автоматично.
+
+**Оновлення:**
+
+```bash
+git -C ~/.claude/skills pull
+```
 
 ---
 
