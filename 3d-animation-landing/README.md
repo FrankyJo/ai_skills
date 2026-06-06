@@ -17,10 +17,14 @@ A Claude Code skill for building premium scroll-animated landing pages from scra
 
 ## Install
 
-Clone directly into your Claude skills folder — no symlinks, works immediately:
+Works even if `~/.claude/skills` already exists:
 
 ```bash
-git clone https://github.com/ppv/skills ~/.claude/skills
+cd ~/.claude/skills \
+  && git init \
+  && git remote add ppv https://github.com/ppv/skills 2>/dev/null; \
+  git fetch ppv main \
+  && git checkout ppv/main -- 3d-animation-landing
 ```
 
 Start a new Claude Code conversation — the skill loads automatically.
@@ -28,7 +32,7 @@ Start a new Claude Code conversation — the skill loads automatically.
 **To update later:**
 
 ```bash
-git -C ~/.claude/skills pull
+cd ~/.claude/skills && git fetch ppv main && git checkout ppv/main -- 3d-animation-landing
 ```
 
 ---
@@ -162,10 +166,14 @@ If you don't have a video, the skill falls back to a numbered image sequence (`f
 
 ## Встановлення
 
-Клонуй прямо в папку навичок Claude — без симлінків, одразу працює:
+Працює навіть якщо `~/.claude/skills` вже існує:
 
 ```bash
-git clone https://github.com/ppv/skills ~/.claude/skills
+cd ~/.claude/skills \
+  && git init \
+  && git remote add ppv https://github.com/ppv/skills 2>/dev/null; \
+  git fetch ppv main \
+  && git checkout ppv/main -- 3d-animation-landing
 ```
 
 Почни нову розмову в Claude Code — навичка завантажиться автоматично.
@@ -173,7 +181,7 @@ git clone https://github.com/ppv/skills ~/.claude/skills
 **Оновлення:**
 
 ```bash
-git -C ~/.claude/skills pull
+cd ~/.claude/skills && git fetch ppv main && git checkout ppv/main -- 3d-animation-landing
 ```
 
 ---
