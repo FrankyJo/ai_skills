@@ -18,7 +18,7 @@ A Claude Code skill for building premium scroll-animated landing pages from scra
 ## Install
 
 ```bash
-git clone https://github.com/ppv/skills ~/ppv-skills && cp -r ~/ppv-skills/3d-animation-landing ~/.claude/skills/
+git clone https://github.com/ppv/ai_skills ~/ai_skills && cp -r ~/ai_skills/3d-animation-landing ~/.claude/skills/
 ```
 
 Start a new Claude Code conversation — the skill loads automatically.
@@ -26,7 +26,7 @@ Start a new Claude Code conversation — the skill loads automatically.
 **To update:**
 
 ```bash
-git -C ~/ppv-skills pull && cp -r ~/ppv-skills/3d-animation-landing ~/.claude/skills/
+git -C ~/ai_skills pull && cp -r ~/ai_skills/3d-animation-landing ~/.claude/skills/
 ```
 
 ---
@@ -161,7 +161,7 @@ If you don't have a video, the skill falls back to a numbered image sequence (`f
 ## Встановлення
 
 ```bash
-git clone https://github.com/ppv/skills ~/ppv-skills && cp -r ~/ppv-skills/3d-animation-landing ~/.claude/skills/
+git clone https://github.com/ppv/ai_skills ~/ai_skills && cp -r ~/ai_skills/3d-animation-landing ~/.claude/skills/
 ```
 
 Почни нову розмову в Claude Code — навичка завантажиться автоматично.
@@ -169,7 +169,7 @@ git clone https://github.com/ppv/skills ~/ppv-skills && cp -r ~/ppv-skills/3d-an
 **Оновлення:**
 
 ```bash
-git -C ~/ppv-skills pull && cp -r ~/ppv-skills/3d-animation-landing ~/.claude/skills/
+git -C ~/ai_skills pull && cp -r ~/ai_skills/3d-animation-landing ~/.claude/skills/
 ```
 
 ---
