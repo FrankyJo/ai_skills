@@ -1,0 +1,12 @@
+{
+  "name": "ppv-skills",
+  "version": "1.0.0",
+  "description": "Register PPV Skills marketplace in Claude Code",
+  "bin": {
+    "ppv-skills": "bin/add-marketplace.mjs"
+  },
+  "files": [
+    "bin"
+  ],
+  "license": "MIT"
+}
