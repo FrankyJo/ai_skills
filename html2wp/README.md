@@ -17,6 +17,26 @@ A Claude Code skill for porting static HTML/CSS layouts onto a custom WordPress 
 
 ## Install
 
+**Option 1 — Claude Code marketplace (recommended)**
+
+```bash
+npx ppv-skills
+```
+
+Then in Claude Code:
+
+```
+/plugin install html2wp@ppv
+```
+
+**Option 2 — npx**
+
+```bash
+npx claude-skill-html2wp
+```
+
+**Option 3 — Manual**
+
 ```bash
 git clone https://github.com/FrankyJo/ai_skills ~/ai_skills && cp -r ~/ai_skills/html2wp ~/.claude/skills/
 ```
@@ -24,7 +44,7 @@ git clone https://github.com/FrankyJo/ai_skills ~/ai_skills && cp -r ~/ai_skills
 **To update:**
 
 ```bash
-git -C ~/ai_skills pull && cp -r ~/ai_skills/html2wp ~/.claude/skills/
+npx claude-skill-html2wp
 ```
 
 ---
