@@ -17,25 +17,13 @@ A Claude Code skill for building premium scroll-animated landing pages from scra
 
 ## Install
 
-**Option 1 — Claude Code marketplace (recommended)**
-
-```bash
-npx ppv-skills
-```
-
-Then in Claude Code:
-
-```
-/plugin install 3d-animation-landing@ppv
-```
-
-**Option 2 — npx**
+**Option 1 — npx**
 
 ```bash
 npx claude-skill-3d-animation-landing
 ```
 
-**Option 3 — Manual**
+**Option 2 — Manual**
 
 ```bash
 git clone https://github.com/FrankyJo/ai_skills ~/ai_skills && cp -r ~/ai_skills/3d-animation-landing ~/.claude/skills/
@@ -180,25 +168,13 @@ If you don't have a video, the skill falls back to a numbered image sequence (`f
 
 ## Встановлення
 
-**Варіант 1 — Маркетплейс Claude Code (рекомендовано)**
-
-```bash
-npx ppv-skills
-```
-
-Потім у Claude Code:
-
-```
-/plugin install 3d-animation-landing@ppv
-```
-
-**Варіант 2 — npx**
+**Варіант 1 — npx**
 
 ```bash
 npx claude-skill-3d-animation-landing
 ```
 
-**Варіант 3 — Вручну**
+**Варіант 2 — Вручну**
 
 ```bash
 git clone https://github.com/FrankyJo/ai_skills ~/ai_skills && cp -r ~/ai_skills/3d-animation-landing ~/.claude/skills/

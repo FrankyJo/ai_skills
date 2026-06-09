@@ -1,18 +1,5 @@
 # PPV Skills
 
-## Install
-
-```bash
-npx ppv-skills
-```
-
-Then install individual skills in Claude Code:
-
-```
-/plugin install 3d-animation-landing@ppv
-/plugin install html2wp@ppv
-```
-
 ## Skills
 
 | Skill | Description |
@@ -24,19 +11,6 @@ Then install individual skills in Claude Code:
 ---
 
 # PPV Skills
-
-## Встановлення
-
-```bash
-npx ppv-skills
-```
-
-Потім встанови потрібні скіли в Claude Code:
-
-```
-/plugin install 3d-animation-landing@ppv
-/plugin install html2wp@ppv
-```
 
 ## Skills
 
