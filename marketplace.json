@@ -1,0 +1,19 @@
+{
+  "name": "PPV Skills",
+  "description": "Premium Claude Code skills by PPV — scroll-animated landing pages and WordPress theme development",
+  "repository": "https://github.com/FrankyJo/ai_skills",
+  "plugins": [
+    {
+      "name": "3d-animation-landing",
+      "description": "Build premium scroll-animated landing pages — canvas frame-sequence engine, 4 design styles (neumorphic / glassmorphic / minimal / dark), 5 framework options, performance hardening.",
+      "skill": "3d-animation-landing",
+      "install": "npx claude-skill-3d-animation-landing"
+    },
+    {
+      "name": "html2wp",
+      "description": "Port HTML/CSS/JS layouts onto a custom WordPress theme. Mode A: scan existing theme → wp-analyze-theme.md. Mode B: scaffold new theme, CPTs, meta boxes, menus — no ACF, no page builders.",
+      "skill": "html2wp",
+      "install": "npx claude-skill-html2wp"
+    }
+  ]
+}

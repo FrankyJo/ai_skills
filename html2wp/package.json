@@ -1,0 +1,15 @@
+{
+  "name": "claude-skill-html2wp",
+  "version": "1.0.0",
+  "description": "Claude Code skill: port HTML/CSS/JS layouts onto a custom WordPress theme",
+  "bin": {
+    "claude-skill-html2wp": "bin/install.mjs"
+  },
+  "files": [
+    "bin",
+    "SKILL.md",
+    "README.md",
+    "references"
+  ],
+  "license": "MIT"
+}
