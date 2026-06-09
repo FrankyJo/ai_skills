@@ -1,6 +1,6 @@
 {
   "name": "claude-skill-3d-animation-landing",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Claude Code skill: build premium scroll-animated landing pages",
   "bin": {
     "claude-skill-3d-animation-landing": "bin/install.mjs"
