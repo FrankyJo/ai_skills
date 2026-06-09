@@ -295,3 +295,4 @@ ctx.drawImage(video, x, y, w, h)  // cover-fit, DPR-масштабування
 | `references/06-performance-optimization.md` | RAF throttling, DPR, пряма робота з DOM |
 | `references/07-claude-code-guide.md` | Поради щодо ефективних промптів |
 | `references/08-responsive-design.md` | Гамбургер-меню, canvas на мобільному, чеклісти |
+| `references/09-hover-interactions.md` | Преміум ховери для кнопок, карток, посилань — всі 4 стилі |
