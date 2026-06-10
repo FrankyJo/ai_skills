@@ -13,7 +13,7 @@
 Via the [skills CLI](https://skills.sh) — no registration needed:
 
 ```bash
-npx skills add https://github.com/FrankyJo/ai_skills --skill fsd-migration
+npx skills add https://github.com/FrankyJo/ai_skills --skill [name-skill]
 ```
 
 Or per-skill npx installers: `npx claude-skill-3d-animation-landing`, `npx claude-skill-html2wp`, `npx claude-skill-fsd-migration`.
@@ -36,7 +36,7 @@ Or per-skill npx installers: `npx claude-skill-3d-animation-landing`, `npx claud
 Через [skills CLI](https://skills.sh) — без реєстрації:
 
 ```bash
-npx skills add https://github.com/FrankyJo/ai_skills --skill fsd-migration
+npx skills add https://github.com/FrankyJo/ai_skills --skill [name-skill]
 ```
 
 Або через npx-інсталятори окремих навичок: `npx claude-skill-3d-animation-landing`, `npx claude-skill-html2wp`, `npx claude-skill-fsd-migration`.
