@@ -1,5 +1,5 @@
 ---
-name: html-to-wordpress
+name: html2wp
 description: >-
   Two-mode WordPress skill. MODE A — scan an existing WordPress theme, capture
   all CPTs / taxonomies / meta keys / menus / templates and write

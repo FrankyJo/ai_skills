@@ -1,3 +1,6 @@
 .DS_Store
 .idea/php.xml
 .idea/vcs.xml
+.claude/
+.agents/
+skills-lock.json

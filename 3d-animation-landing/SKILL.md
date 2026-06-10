@@ -1,5 +1,5 @@
 ---
-name: 3d-scroll-website
+name: 3d-animation-landing
 description: Build premium scroll-animated landing pages from scratch — stack selection, canvas frame-sequence animations, smooth scroll, configurable design systems (neumorphic / glassmorphic / minimal / dark), and performance hardening. Use this whenever the user mentions: building a landing page, a 3D website, a scroll-animated site, a canvas frame sequence (like Apple's AirPods page), scroll-driven hero animations, smooth-scroll sites, premium/agency-quality landing pages, SaaS landing pages, product showcases, portfolio sites, or any site with advanced scroll effects. Use it EVEN if the user doesn't say "3D" — phrases like "scroll animation", "frame sequence", "sticky canvas", "hero animation that plays on scroll", "premium landing page", or "animated website" are all signals. This is the whole pipeline in one place: intake questions, stack scaffolding, frame-sequence engine, scroll math, Framer Motion patterns, design system, performance hardening — don't stitch partial answers together when this skill covers it end-to-end.
 ---
 
