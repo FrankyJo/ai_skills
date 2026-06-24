@@ -7,10 +7,9 @@ A Claude Code skill for porting static HTML/CSS layouts onto a custom WordPress 
 ## What it does
 
 - Asks intake questions: how many pages, which sections repeat, what content is dynamic
-- Scaffolds a complete custom theme based on [wordpress_blank](https://github.com/FrankyJo/wordpress_blank)
+- Scaffolds a complete custom theme from scratch
 - Breaks HTML into the right WordPress concepts: header/footer, reusable blocks, page templates, custom post types
 - Generates native meta boxes (no ACF) for custom fields
-- Sets up SCSS + Webpack build pipeline
 - Enforces BEM, proper escaping, nonces, and WP best practices throughout
 
 ---
@@ -57,10 +56,9 @@ Claude will ask 6 intake questions, then scaffold the full theme.
 
 | Question | Answer |
 |---|---|
-| Base theme structure | [wordpress_blank](https://github.com/FrankyJo/wordpress_blank) |
 | Custom fields | Native meta boxes (no ACF) |
 | Page builders | Never |
-| CSS | SCSS + Webpack, one file per page |
+| CSS | Plain CSS, one file per page |
 | JS | Vanilla JS or lightweight libs, jQuery deregistered |
 | Repeating content | Custom Post Types |
 | Section reuse | `get_template_part('blocks/name')` |
@@ -79,9 +77,7 @@ Claude will ask 6 intake questions, then scaffold the full theme.
 ├── app/
 │   ├── core/      ← postTypes, taxonomies, customField
 │   └── front/     ← addStyles, addScripts, menuCreator
-├── src/css/       ← SCSS source
-├── src/js/        ← JS source
-└── public/        ← webpack output
+└── public/        ← CSS / JS / images
 ```
 
 ---
@@ -96,10 +92,9 @@ Claude will ask 6 intake questions, then scaffold the full theme.
 ## Що вона робить
 
 - Ставить вхідні запитання: кількість сторінок, які секції повторюються, який контент динамічний
-- Скаффолдить повну кастомну тему на базі [wordpress_blank](https://github.com/FrankyJo/wordpress_blank)
+- Скаффолдить повну кастомну тему з нуля
 - Розбиває HTML на правильні концепції WordPress: header/footer, блоки що повторюються, шаблони сторінок, кастомні типи постів
 - Генерує нативні мета-поля (без ACF) для кастомних полів
-- Налаштовує SCSS + Webpack білд-пайплайн
 - Дотримується BEM, правильного екранування, nonces та найкращих практик WP
 
 ---
@@ -146,10 +141,9 @@ Claude поставить 6 вхідних запитань, потім скаф
 
 | Питання | Відповідь |
 |---|---|
-| Базова структура теми | [wordpress_blank](https://github.com/FrankyJo/wordpress_blank) |
 | Кастомні поля | Нативні мета-поля (без ACF) |
 | Конструктори сторінок | Ніколи |
-| CSS | SCSS + Webpack, один файл на сторінку |
+| CSS | Чистий CSS, один файл на сторінку |
 | JS | Vanilla JS або легкі бібліотеки, jQuery відключений |
 | Контент що повторюється | Кастомні типи постів |
 | Повторне використання секцій | `get_template_part('blocks/name')` |
@@ -168,7 +162,5 @@ Claude поставить 6 вхідних запитань, потім скаф
 ├── app/
 │   ├── core/      ← postTypes, taxonomies, customField
 │   └── front/     ← addStyles, addScripts, menuCreator
-├── src/css/       ← вихідний SCSS
-├── src/js/        ← вихідний JS
-└── public/        ← вивід webpack
+└── public/        ← CSS / JS / зображення
 ```
