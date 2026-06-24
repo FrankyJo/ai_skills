@@ -28,8 +28,9 @@ settings.extraKnownMarketplaces[MARKETPLACE_KEY] = {
 
 writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
 console.log(`
-Marketplace registered! Now install skills with:
+Marketplace registered! Install skills with:
 
-  /plugin install 3d-animation-landing@ppv
-  /plugin install html2wp@ppv
+  npx claude-skill-3d-animation-landing
+  npx claude-skill-html2wp
+  npx claude-skill-fsd-migration
 `);
