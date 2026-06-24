@@ -14,12 +14,6 @@
       "description": "Port HTML/CSS/JS layouts onto a custom WordPress theme. Mode A: scan existing theme → wp-analyze-theme.md. Mode B: scaffold new theme, CPTs, meta boxes, menus — no ACF, no page builders.",
       "skill": "html2wp",
       "install": "npx claude-skill-html2wp"
-    },
-    {
-      "name": "fsd-migration",
-      "description": "Migrate an existing frontend project (incl. monorepos) to Feature-Sliced Design v2.1 — audit, written migration plan with path mapping, step-by-step restructure verified by build/tests, Steiger + ESLint boundary enforcement.",
-      "skill": "fsd-migration",
-      "install": "npx claude-skill-fsd-migration"
     }
   ]
 }

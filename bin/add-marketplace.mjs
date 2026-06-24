@@ -32,5 +32,4 @@ Marketplace registered! Install skills with:
 
   npx claude-skill-3d-animation-landing
   npx claude-skill-html2wp
-  npx claude-skill-fsd-migration
 `);
