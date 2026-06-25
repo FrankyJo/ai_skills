@@ -6,15 +6,17 @@
 | ----- | ----------- |
 | [3d-animation-landing](./3d-animation-landing/README.md) | Build premium scroll-animated landing pages — canvas video engine, 4 design styles, 5 framework options, responsive-first |
 | [html2wp](./html2wp/README.md) | Port HTML/CSS/JS layouts onto a custom WordPress theme. Mode A: scan existing theme → wp-analyze-theme.md (for redesigns). Mode B: scaffold new theme, split assets, CPTs, meta boxes, menus — no ACF, no page builders |
+| [fsd-migration](./fsd-migration/README.md) | Migrate an existing frontend project (incl. monorepos) to Feature-Sliced Design v2.1 — audit, written migration plan with path mapping, step-by-step restructure verified by build/tests, Steiger + ESLint enforcement |
 
 ## Install
 
-Per-skill npx installers:
+Via the [skills CLI](https://skills.sh) — no registration needed:
 
 ```bash
-npx claude-skill-3d-animation-landing
-npx claude-skill-html2wp
+npx skills add https://github.com/FrankyJo/ai_skills --skill fsd-migration
 ```
+
+Or per-skill npx installers: `npx claude-skill-3d-animation-landing`, `npx claude-skill-html2wp`, `npx claude-skill-fsd-migration`.
 
 ---
 ---
